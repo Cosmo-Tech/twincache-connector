@@ -2,8 +2,8 @@
 # Licensed under the MIT license.
 import logging
 
-from CosmoTech_Libraries.Modelops.core.io.model_exporter import ModelExporter
-from CosmoTech_Libraries.Modelops.core.io.model_metadata import ModelMetadata
+from CosmoTech_Acceleration_Library.Modelops.core.io.model_exporter import ModelExporter
+from CosmoTech_Acceleration_Library.Modelops.core.io.model_metadata import ModelMetadata
 
 logger = logging.getLogger(__name__)
 
