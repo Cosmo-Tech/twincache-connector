@@ -8,7 +8,7 @@ from TwinCache_Connector.twincache_connector import TwinCacheConnector
 
 main_logger_name = "TwinCacheConnector_main"
 
-env_var_required = ["TWIN_CACHE_HOST", "TWIN_CACHE_PORT", "TWIN_CACHE_NAME", "EXPORT_PATH"]
+env_var_required = ["TWIN_CACHE_HOST", "TWIN_CACHE_PORT", "TWIN_CACHE_NAME", "CSM_FETCH_ABSOLUTE_PATH"]
 
 missing_env_vars = []
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
         twin_cache_host = os.getenv("TWIN_CACHE_HOST")
         twin_cache_port = os.getenv("TWIN_CACHE_PORT")
         twin_cache_name = os.getenv("TWIN_CACHE_NAME")
-        export_path = os.path.join(os.getenv("EXPORT_PATH"), '')
+        export_path = os.path.join(os.getenv("CSM_FETCH_ABSOLUTE_PATH"), '')
         logger.debug("Data will be exported to %s", export_path)
         TwinCacheConnector(twin_cache_host=twin_cache_host,
                            twin_cache_port=int(twin_cache_port), twin_cache_name=twin_cache_name,

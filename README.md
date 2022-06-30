@@ -4,6 +4,12 @@ The aim of this project is to read data from Cosmo Tech Twin Cache solution
 
 ## Changelog
 
+### Version 0.0.2
+
+#### Fix
+
+- Change EXPORT_PATH to CSM_FETCH_ABSOLUTE_PATH
+
 ### Version 0.0.1
 
 #### Features
@@ -19,7 +25,7 @@ Here is the list of environment variables:
 - **TWIN_CACHE_HOST**: the twin cache host
 - **TWIN_CACHE_PORT**: the twin cache port
 - **TWIN_CACHE_NAME**: the twin cache key name where data will be stored
-- **EXPORT_PATH**: defined the CSV files export path
+- **CSM_FETCH_ABSOLUTE_PATH**: defined the CSV files export path
 
 ## Log level
 
@@ -49,7 +55,7 @@ Fill the following command with your information:
 export TWIN_CACHE_HOST=<twin_cache_host>
 export TWIN_CACHE_NAME=<twin_cache_name>
 export TWIN_CACHE_PORT=<twin_cache_port>
-export EXPORT_PATH=<export_path>
+export CSM_FETCH_ABSOLUTE_PATH=<export_path>
 ```
 
 Then run:
