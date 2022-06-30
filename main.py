@@ -35,10 +35,14 @@ if __name__ == "__main__":
         twin_cache_host = os.getenv("TWIN_CACHE_HOST")
         twin_cache_port = os.getenv("TWIN_CACHE_PORT")
         twin_cache_name = os.getenv("TWIN_CACHE_NAME")
+        twin_cache_password = os.getenv("TWIN_CACHE_PASSWORD")
         export_path = os.path.join(os.getenv("CSM_FETCH_ABSOLUTE_PATH"), '')
-        logger.debug("Data will be exported to %s", export_path)
+        logger.debug("twin_cache_host %s", twin_cache_host)
+        logger.debug("twin_cache_port %s", twin_cache_port)
+        logger.debug("twin_cache_name %s", twin_cache_name)
         TwinCacheConnector(twin_cache_host=twin_cache_host,
                            twin_cache_port=int(twin_cache_port), twin_cache_name=twin_cache_name,
+                           twin_cache_password=twin_cache_password,
                            export_path=export_path).run()
     else:
         raise Exception(f"Missing environment variables named {missing_env_vars}")

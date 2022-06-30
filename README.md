@@ -4,6 +4,12 @@ The aim of this project is to read data from Cosmo Tech Twin Cache solution
 
 ## Changelog
 
+### Version 0.0.3
+
+#### Features
+
+-Add password management
+
 ### Version 0.0.2
 
 #### Fix
@@ -25,6 +31,7 @@ Here is the list of environment variables:
 - **TWIN_CACHE_HOST**: the twin cache host
 - **TWIN_CACHE_PORT**: the twin cache port
 - **TWIN_CACHE_NAME**: the twin cache key name where data will be stored
+- **TWIN_CACHE_PASSWORD**: the twin cache password udes to read data
 - **CSM_FETCH_ABSOLUTE_PATH**: defined the CSV files export path
 
 ## Log level
