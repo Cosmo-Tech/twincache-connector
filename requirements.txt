@@ -1,1 +1,1 @@
-CosmoTech_Acceleration_Library~=0.1.7
+CosmoTech_Acceleration_Library~=0.2.1

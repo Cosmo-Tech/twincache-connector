@@ -1,6 +1,7 @@
 # Copyright (c) Cosmo Tech corporation.
 # Licensed under the MIT license.
 import logging
+import time
 
 from CosmoTech_Acceleration_Library.Modelops.core.io.model_exporter import ModelExporter
 from CosmoTech_Acceleration_Library.Modelops.core.io.model_metadata import ModelMetadata
@@ -31,4 +32,8 @@ class TwinCacheConnector:
         """
         Export all data from twin cache instance
         """
+        logger.debug("Start export job...")
+        export_job_start = time.time()
         self.m_exporter.export_all_data()
+        export_job_timing = time.time() - export_job_start
+        logger.debug(f"Export job took : {export_job_timing} s")
