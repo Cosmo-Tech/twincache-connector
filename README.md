@@ -2,22 +2,6 @@
 
 The aim of this project is to read data from Cosmo Tech Twin Cache solution
 
-## Changelog
-
-### Version 0.0.3
-
-#### Features
-
--Add password management
-
-### Version 0.0.2
-
-#### Fix
-
-- Change EXPORT_PATH to CSM_FETCH_ABSOLUTE_PATH
-
-### Version 0.0.1
-
 #### Features
 
 - Read data from Cosmo Tech Twin Cache solution regarding environment variables
@@ -62,6 +46,7 @@ Fill the following command with your information:
 export TWIN_CACHE_HOST=<twin_cache_host>
 export TWIN_CACHE_NAME=<twin_cache_name>
 export TWIN_CACHE_PORT=<twin_cache_port>
+export TWIN_CACHE_PASSWORD=<twin_cache_port>
 export CSM_FETCH_ABSOLUTE_PATH=<export_path>
 ```
 
