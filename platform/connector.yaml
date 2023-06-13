@@ -34,4 +34,4 @@ repository: cosmo-tech/twincache-connector
 tags:
   - SimuOps Connector dev
 url: https://github.com/Cosmo-Tech/twincache-connector
-version: 0.2.0
+version: 0.2.1
