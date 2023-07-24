@@ -6,21 +6,9 @@ parameterGroups:
   - id: parameters
     label: Parameters
     parameters:
-      - envVar: TWIN_CACHE_HOST
-        id: TWIN_CACHE_HOST
-        label: SimuOps URL
-        valueType: string
-      - envVar: TWIN_CACHE_PORT
-        id: TWIN_CACHE_PORT
-        label: SimuOps port
-        valueType: string
       - envVar: TWIN_CACHE_NAME
         id: TWIN_CACHE_NAME
         label: SimuOps name
-        valueType: string
-      - envVar: TWIN_CACHE_PASSWORD
-        id: TWIN_CACHE_PASSWORD
-        label: SimuOps Password
         valueType: string
       - envVar: CSM_FETCH_ABSOLUTE_PATH
         id: CSM_FETCH_ABSOLUTE_PATH
