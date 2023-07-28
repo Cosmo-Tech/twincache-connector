@@ -1,5 +1,6 @@
 # Copyright (c) Cosmo Tech corporation.
 # Licensed under the MIT license.
+import os
 import logging
 import time
 
@@ -28,12 +29,16 @@ class TwinCacheConnector:
                                         version=int(last_graph_version), export_dir=export_path,
                                         password=twin_cache_password)
 
-    def run(self):
+    def run(self, filtering_queries: list = None):
         """
         Export all data from twin cache instance
         """
         logger.debug("Start export job...")
         export_job_start = time.time()
-        self.m_exporter.export_all_data()
+        if filtering_queries:
+            self.m_exporter.export_from_queries(filtering_queries)
+        else:
+            self.m_exporter.export_all_data()
+
         export_job_timing = time.time() - export_job_start
         logger.debug(f"Export job took : {export_job_timing} s")
