@@ -30,8 +30,12 @@ parameterGroups:
         id: LOG_LEVEL
         label: log level
         valueType: string
+      - envVar: SCENARIO_SUBSET_QUERY_NAME
+        id: SCENARIO_SUBSET_QUERY_NAME
+        label: scenario subset query name
+        valueType: string
 repository: cosmo-tech/twincache-connector
 tags:
   - SimuOps Connector dev
 url: https://github.com/Cosmo-Tech/twincache-connector
-version: 0.2.1
+version: 0.2.2
