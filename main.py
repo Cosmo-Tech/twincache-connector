@@ -24,11 +24,6 @@ logging.basicConfig(stream=sys.stdout, level=log_level,
 logger = logging.getLogger(__name__)
 
 
-if __name__ == "__main__":
-    twincache_connector = create_connector()
-    twincache_connector.run(get_parametered_queries())
-
-
 def check_env_var():
     """
     Check if all required environment variables are specified
@@ -90,3 +85,8 @@ def get_parametered_queries() -> list:
             raise RuntimeError(f"Multiple parameter {os.getenv('SCENARIO_SUBSET_QUERY_NAME')} found in scenario parameters")
     else:
         return []
+
+
+if __name__ == "__main__":
+    twincache_connector = create_connector()
+    twincache_connector.run(get_parametered_queries())
