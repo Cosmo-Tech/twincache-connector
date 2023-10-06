@@ -56,6 +56,11 @@ def create_connector() -> TwinCacheConnector:
 
 
 def get_parametered_queries() -> list:
+    twin_cache_filtering_queries = os.getenv("SUBSET_QUERY")
+    logger.debug(f'Filtering queries receved: {twin_cache_filtering_queries}')
+    if twin_cache_filtering_queries:
+        return twin_cache_filtering_queries.split(';')
+
     twin_cache_filtering_queries_name = os.getenv("SCENARIO_SUBSET_QUERY_NAME")
     logger.debug("twin_cache_filtering_queries_name %s", twin_cache_filtering_queries_name)
     if twin_cache_filtering_queries_name:
