@@ -25,18 +25,11 @@ class TwinCacheConnector:
         self.twin_cache_port = twin_cache_port
         self.twin_cache_name = twin_cache_name
         self.export_path = export_path
-        self.m_metadata = ModelMetadata(host=twin_cache_host,
-                                        port=twin_cache_port,
-                                        name=twin_cache_name,
-                                        password=twin_cache_password)
-        last_graph_version = self.m_metadata.get_last_graph_version()
-        logger.debug(f"Graph version to export : {last_graph_version}")
         self.m_exporter = ModelExporter(host=twin_cache_host,
                                         port=twin_cache_port,
                                         name=twin_cache_name,
-                                        version=int(last_graph_version),
-                                        export_dir=export_path,
-                                        password=twin_cache_password)
+                                        password=twin_cache_password,
+                                        export_dir=export_path)
 
     def run(self, filtering_queries: list = None):
         """
