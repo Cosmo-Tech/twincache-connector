@@ -1,11 +1,9 @@
 # Copyright (c) Cosmo Tech corporation.
 # Licensed under the MIT license.
-import os
 import logging
 import time
 
 from CosmoTech_Acceleration_Library.Modelops.core.io.model_exporter import ModelExporter
-from CosmoTech_Acceleration_Library.Modelops.core.io.model_metadata import ModelMetadata
 
 logger = logging.getLogger(__name__)
 

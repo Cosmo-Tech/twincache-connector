@@ -6,8 +6,6 @@ import sys
 import cosmotech_api
 import json
 from cosmotech_api.api import scenario_api
-from cosmotech_api.model.scenario import Scenario
-from azure.identity import DefaultAzureCredential
 
 from TwinCache_Connector.twincache_connector import TwinCacheConnector
 from auth.authentication import Authentication
@@ -57,13 +55,13 @@ def create_connector() -> TwinCacheConnector:
 
 def get_parametered_queries() -> list:
     twin_cache_filtering_queries = os.getenv("SUBSET_QUERY")
-    logger.debug(f'Filtering queries receved: {twin_cache_filtering_queries}')
     if twin_cache_filtering_queries:
+        logger.debug(f'Filtering queries receved: {twin_cache_filtering_queries}')
         return twin_cache_filtering_queries.split(';')
 
     twin_cache_filtering_queries_name = os.getenv("SCENARIO_SUBSET_QUERY_NAME")
-    logger.debug("twin_cache_filtering_queries_name %s", twin_cache_filtering_queries_name)
     if twin_cache_filtering_queries_name:
+        logger.debug(f"twin_cache_filtering_queries_name: {twin_cache_filtering_queries_name}")
         # get query parameters
         default_cred = Authentication(os.getenv('IDENTITY_PROVIDER'))
         configuration = cosmotech_api.Configuration(host=os.getenv('CSM_API_URL'),

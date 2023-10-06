@@ -3,6 +3,7 @@ import pytest
 from unittest.mock import patch
 import main
 import cosmotech_api
+import auth
 
 
 @patch('main.TwinCacheConnector')
@@ -37,8 +38,8 @@ def queries_var_env():
 
 
 @patch('cosmotech_api.api.scenario_api.ScenarioApi')
-@patch('main.DefaultAzureCredential')
-def test_get_parametered_queries_with_empty_env_var(cred, mock_scenario_api, queries_var_env):
+@patch('auth.authentication.Authentication.get_token')
+def test_get_parametered_queries_with_empty_env_var(mock_auth, mock_scenario_api, queries_var_env):
     # create scenario parameter value
     scenario_parameter_values = cosmotech_api.model.scenario_run_template_parameter_value.ScenarioRunTemplateParameterValue(
         parameter_id="scenario_subset", value="")
@@ -56,8 +57,8 @@ def test_get_parametered_queries_with_empty_env_var(cred, mock_scenario_api, que
 
 
 @patch('cosmotech_api.api.scenario_api.ScenarioApi')
-@patch('main.DefaultAzureCredential')
-def test_get_parametered_queries_with_env_var(cred, mock_scenario_api, queries_var_env):
+@patch('auth.authentication.Authentication.get_token')
+def test_get_parametered_queries_with_env_var(mock_auth, mock_scenario_api, queries_var_env):
     # create scenario parameter value
     scenario_parameter_values = cosmotech_api.model.scenario_run_template_parameter_value.ScenarioRunTemplateParameterValue(
         parameter_id="scenario_subset", value="[\"query1\", \"query2\"]")
@@ -75,8 +76,8 @@ def test_get_parametered_queries_with_env_var(cred, mock_scenario_api, queries_v
 
 
 @patch('cosmotech_api.api.scenario_api.ScenarioApi')
-@patch('main.DefaultAzureCredential')
-def test_get_parametered_queries_with_too_many_matching_env_var(cred, mock_scenario_api, queries_var_env):
+@patch('auth.authentication.Authentication.get_token')
+def test_get_parametered_queries_with_too_many_matching_env_var(mock_auth, mock_scenario_api, queries_var_env):
     # create scenario parameter value
     scenario_parameter_values_1 = cosmotech_api.model.scenario_run_template_parameter_value.ScenarioRunTemplateParameterValue(
         parameter_id="scenario_subset", value="[\"query1\", \"query2\"]")
@@ -102,8 +103,7 @@ def empty_queries_var_env():
 
 
 @patch('cosmotech_api.api.scenario_api.ScenarioApi')
-@patch('main.DefaultAzureCredential')
-def test_get_parametered_queries_with_env_var_empty(cred, mock_scenario_api, empty_queries_var_env):
+def test_get_parametered_queries_with_env_var_empty(mock_scenario_api, empty_queries_var_env):
     # create scenario parameter value
     scenario_parameter_values = cosmotech_api.model.scenario_run_template_parameter_value.ScenarioRunTemplateParameterValue(
         parameter_id="scenario_subset", value="[\"query1\", \"query2\"]")
@@ -121,8 +121,8 @@ def test_get_parametered_queries_with_env_var_empty(cred, mock_scenario_api, emp
 
 
 @patch('cosmotech_api.api.scenario_api.ScenarioApi')
-@patch('main.DefaultAzureCredential')
-def test_get_parametered_queries_with_env_var_not_found(cred, mock_scenario_api, queries_var_env):
+@patch('auth.authentication.Authentication.get_token')
+def test_get_parametered_queries_with_env_var_not_found(mock_auth, mock_scenario_api, queries_var_env):
     # create scenario parameter value
     scenario_parameter_values = cosmotech_api.model.scenario_run_template_parameter_value.ScenarioRunTemplateParameterValue(
         parameter_id="scenario_noTheRightName", value="[\"query1\", \"query2\"]")
