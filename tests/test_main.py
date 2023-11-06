@@ -3,7 +3,6 @@ import pytest
 from unittest.mock import patch
 import main
 import cosmotech_api
-import auth
 
 
 @patch('main.TwinCacheConnector')
@@ -20,6 +19,11 @@ def var_env():
     os.environ['TWIN_CACHE_PORT'] = '6379'
     os.environ['TWIN_CACHE_NAME'] = 'test'
     os.environ['CSM_FETCH_ABSOLUTE_PATH'] = '/tmp'
+    yield
+    os.environ.pop('TWIN_CACHE_HOST')
+    os.environ.pop('TWIN_CACHE_PORT')
+    os.environ.pop('TWIN_CACHE_NAME')
+    os.environ.pop('CSM_FETCH_ABSOLUTE_PATH')
 
 
 @patch('main.TwinCacheConnector')
@@ -34,12 +38,28 @@ def test_get_parametered_queries_no_env_var():
 
 @pytest.fixture
 def queries_var_env():
-    os.environ['SCENARIO_SUBSET_QUERY_NAME'] = 'scenario_subset'
+    os.environ['SUBSET_QUERY'] = 'query1;query2'
+    yield
+    os.environ.pop('SUBSET_QUERY')
 
 
 @patch('cosmotech_api.api.scenario_api.ScenarioApi')
 @patch('auth.authentication.Authentication.get_token')
-def test_get_parametered_queries_with_empty_env_var(mock_auth, mock_scenario_api, queries_var_env):
+def test_get_parametered_queries_with_queries_env_var(mock_auth, mock_scenario_api, queries_var_env):
+    queries = main.get_parametered_queries()
+    assert queries == ['query1', 'query2']
+
+
+@pytest.fixture
+def scenario_queries_var_env():
+    os.environ['SCENARIO_SUBSET_QUERY_NAME'] = 'scenario_subset'
+    yield
+    os.environ.pop('SCENARIO_SUBSET_QUERY_NAME')
+
+
+@patch('cosmotech_api.api.scenario_api.ScenarioApi')
+@patch('auth.authentication.Authentication.get_token')
+def test_get_parametered_queries_with_empty_env_var(mock_auth, mock_scenario_api, scenario_queries_var_env):
     # create scenario parameter value
     scenario_parameter_values = cosmotech_api.model.scenario_run_template_parameter_value.ScenarioRunTemplateParameterValue(
         parameter_id="scenario_subset", value="")
@@ -58,7 +78,7 @@ def test_get_parametered_queries_with_empty_env_var(mock_auth, mock_scenario_api
 
 @patch('cosmotech_api.api.scenario_api.ScenarioApi')
 @patch('auth.authentication.Authentication.get_token')
-def test_get_parametered_queries_with_env_var(mock_auth, mock_scenario_api, queries_var_env):
+def test_get_parametered_queries_with_env_var(mock_auth, mock_scenario_api, scenario_queries_var_env):
     # create scenario parameter value
     scenario_parameter_values = cosmotech_api.model.scenario_run_template_parameter_value.ScenarioRunTemplateParameterValue(
         parameter_id="scenario_subset", value="[\"query1\", \"query2\"]")
@@ -77,7 +97,7 @@ def test_get_parametered_queries_with_env_var(mock_auth, mock_scenario_api, quer
 
 @patch('cosmotech_api.api.scenario_api.ScenarioApi')
 @patch('auth.authentication.Authentication.get_token')
-def test_get_parametered_queries_with_too_many_matching_env_var(mock_auth, mock_scenario_api, queries_var_env):
+def test_get_parametered_queries_with_too_many_matching_env_var(mock_auth, mock_scenario_api, scenario_queries_var_env):
     # create scenario parameter value
     scenario_parameter_values_1 = cosmotech_api.model.scenario_run_template_parameter_value.ScenarioRunTemplateParameterValue(
         parameter_id="scenario_subset", value="[\"query1\", \"query2\"]")
@@ -100,6 +120,8 @@ def test_get_parametered_queries_with_too_many_matching_env_var(mock_auth, mock_
 @pytest.fixture
 def empty_queries_var_env():
     os.environ['SCENARIO_SUBSET_QUERY_NAME'] = ''
+    yield
+    os.environ.pop('SCENARIO_SUBSET_QUERY_NAME')
 
 
 @patch('cosmotech_api.api.scenario_api.ScenarioApi')
@@ -122,7 +144,7 @@ def test_get_parametered_queries_with_env_var_empty(mock_scenario_api, empty_que
 
 @patch('cosmotech_api.api.scenario_api.ScenarioApi')
 @patch('auth.authentication.Authentication.get_token')
-def test_get_parametered_queries_with_env_var_not_found(mock_auth, mock_scenario_api, queries_var_env):
+def test_get_parametered_queries_with_env_var_not_found(mock_auth, mock_scenario_api, scenario_queries_var_env):
     # create scenario parameter value
     scenario_parameter_values = cosmotech_api.model.scenario_run_template_parameter_value.ScenarioRunTemplateParameterValue(
         parameter_id="scenario_noTheRightName", value="[\"query1\", \"query2\"]")
